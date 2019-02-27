@@ -1,0 +1,80 @@
+﻿
+<!DOCTYPE HTML>
+<head>
+    <meta charset="UTF-8">
+    <title>LİSANS TEZİ</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/style/images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="~/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="~/StyleSheet2.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="~/style/color/red.css" media="all" />
+    <link rel="stylesheet" type="text/css" media="screen" href="~/style/css/prettyPhoto.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/type/museo.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="~/style/type/ptsans.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="~/style/type/charis.css" media="all" />
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <div class="logo opacity"><a href="/site/anasayfa"><img src="~/haberlerticon.png" height="60" width="250 " alt="" /> </a></div>
+
+            <div id="menu2" class="social">
+                @if (Session["yetki"] == null)
+            {
+                    <ul class="nav navbar-nav  ml-auto ">
+                        <li class="nav-item">
+                            <a class="nav-link" style="padding:20px  " href="/Uye/Create/">Üye Ol</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="padding:20px" href="/Uye/Login/">Giriş</a>
+                        </li>
+                    </ul>
+                }
+                else if (Convert.ToInt32(Session["yetki"]) == 1)
+                {
+                    <ul class="nav navbar-nav  ml-auto ">
+                        <li class="nav-item">
+                            <a class="nav-link" style="padding:20px" href="~/site/kullaniciProfil/@Session["kullaniciadi"]">@Session["kullaniciadi"].ToString()</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="padding:20px" href="/Admin/Index/">Yönetim Paneli</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="padding:20px" href="/Uye/Logout/">Çıkış</a>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav  ml-auto ">
+                        <li class="nav-item">
+                            <a class="nav-link" style="padding:20px" href="/Admin/Index/">@Session["kullaniciadi"].ToString()</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" style="padding:20px" href="/Uye/Logout/">Çıkış</a>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+        <!-- Begin Menu -->
+        <div id="menu" class="menu opacity">
+            <ul>
+                <li><a href="/site/anasayfa">Anasayfa</a></li>
+                @{
+                    Html.RenderAction("KategoriPartial1", "Site"); 
+                }
+                <li><a href="/site/iletisim">İletişim</a></li>
+            </ul>
+            <br style="clear: left" />
+        </div>
+        <div>
+            @RenderBody()
+          
+        </div>
+        <div id="copyright" class="opacity">
+            <p>Özgür Aydın.Tüm hakları saklıdır.</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/style/js/scripts.js"></script>
+</body>

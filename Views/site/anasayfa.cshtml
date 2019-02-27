@@ -1,0 +1,100 @@
+﻿@model IEnumerable<darkZencefil.Models.Yazi>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="~/style/images/favicon.png" />
+<link rel="stylesheet" type="text/css" href="~/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="~/style/color/red.css" media="all" />
+<link rel="stylesheet" type="text/css" media="screen" href="~/style/css/prettyPhoto.css" />
+<link rel="stylesheet" type="text/css" href="~/style/type/museo.css" media="all" />
+<link rel="stylesheet" type="text/css" href="~/style/type/ptsans.css" media="all" />
+<link rel="stylesheet" type="text/css" href="~/style/type/charis.css" media="all" />
+
+<script type="text/javascript" src="~/style/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="~/style/js/ddsmoothmenu.js"></script>
+<script type="text/javascript" src="~/style/js/transify.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.aw-showcase.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.jcarousel.js"></script>
+<script type="text/javascript" src="~/style/js/carousel.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.superbgimage.min.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.slickforms.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('.forms').dcSlickForms();
+    });
+</script>
+<script type="text/javascript">
+
+    ////////slider başlangıç
+    $(document).ready(function () {
+        $("#showcase").awShowcase(
+        {
+            content_width: 800,
+            content_height: 400,
+            auto: true,
+            interval: 3000,
+            continuous: false,
+            arrows: true,
+            buttons: true,
+            btn_numbers: true,
+            keybord_keys: true,
+            mousetrace: false, /* Trace x and y coordinates for the mouse */
+            pauseonover: true,
+            stoponclick: false,
+            transition: 'fade', /* hslide/vslide/fade */
+            transition_delay: 0,
+            transition_speed: 200,
+            show_caption: 'onload' /* onload/onhover/show */
+        });
+    });
+
+</script>
+
+<div id="container" class="opacity">
+    <div id="showcase" class="showcase">    
+        @{
+            Html.RenderAction("slider", false);
+        }
+    </div>
+    <div class="intro">Doğru ve hızlı haberin adresi</div>
+    <div class="hr2"></div>
+    <div class="clear"></div>
+    <br />
+    <br />
+    <br />
+    <div id="footer">
+        <div class="footer-top"></div>
+        <!-- Divider -->
+        <div class="one-half">
+            <h3>Son Haberler</h3>         
+                @{
+                    Html.RenderAction("SonYazilar", "Site");  /*true iken hata veriyordu*/
+                }
+        </div>     
+        <div class="one-half last">
+            <h3>Hakkımızda</h3>
+            <p>Pamukkale Üniversitesi son sınıf öğrecisiyim.Adım Özgür.Lisans tezi olarak web tabanlı bir haber sitesi yapıyorum.Kullanıcıların üye olup youm yapabileceği bir site.</p> <br />      
+        </div>  
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="one-third">
+    @*ana dalarrımız gösterim şekli*@
+    <img src="~/style/images/icon1.png" alt="" class="center" /><br />
+    <h4 class="center">Web Tabanlı</h4>
+    <p class="center">Bu sayfa tüm web tarayıcılarında kusursuz çalışmaktadır.</p>
+</div>
+<div class="one-third">
+    <img src="~/style/images/icon3.png" alt="" class="center" /><br />
+    <h4 class="center">Kaliteli Medya</h4>
+    <p class="center">Tüm medya öğeleri yüksek çözünürlüktedir.</p>
+</div>
+<div class="one-third last">
+    <img src="~/style/images/icon4.png" alt="" class="center" /><br />
+    <h4 class="center">Performans</h4>
+    <p class="center">Veri ve zamandan kar edin.</p>
+</div>
+<div class="clear"></div>
+<div class="hr1"></div>

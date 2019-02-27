@@ -1,0 +1,11 @@
+﻿@model IEnumerable<darkZencefil.Models.Kategori>
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <li>
+        <a href="/site/blog/@item.KategoriID">@item.KategoriAdi<span>@item.KategoriAdi.Length</span></a>
+        
+    </li>
+}

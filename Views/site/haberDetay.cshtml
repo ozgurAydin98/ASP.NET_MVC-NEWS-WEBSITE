@@ -1,0 +1,159 @@
+﻿@model darkZencefil.Models.Yazi
+@{
+    ViewBag.Title = "haberDetay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.HiddenFor(x => x.YaziID)
+
+
+<link rel="shortcut icon" type="image/x-icon" href="~/style/images/favicon.png" />
+<link rel="stylesheet" type="text/css" href="~/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="~/style/color/red.css" media="all" />
+<link rel="stylesheet" type="text/css" media="screen" href="~/style/css/prettyPhoto.css" />
+<link rel="stylesheet" type="text/css" href="~/style/type/museo.css" media="all" />
+<link rel="stylesheet" type="text/css" href="~/style/type/ptsans.css" media="all" />
+<link rel="stylesheet" type="text/css" href="~/style/type/charis.css" media="all" />
+
+<script type="text/javascript" src="~/style/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="~/style/js/ddsmoothmenu.js"></script>
+<script type="text/javascript" src="~/style/js/transify.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.superbgimage.min.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.slickforms.js"></script>
+>
+<div id="container" class="opacity">    
+    <div class="blog-post">     
+        <div class="content">      
+            <div class="post">      
+                <div class="post-info">             
+                    <div class="post-date"> <span class="day">@Model.Tarih.Value.Day</span> <span class="month">@String.Format("{0: MMM}", Model.Tarih)</span> <span class="year">@Model.Tarih.Value.Year</span> </div>                    
+                    <div class="post-title">
+                        <h1>@Model.Baslik</h1>
+                        <div class="post-meta"> <span class="comments"><a href="#">@Model.Yorums.Count</a></span> <span class="categories"><a href="#">@Model.Kategori.KategoriAdi</a></span> </div>
+                    </div>             
+                </div>
+                <div class="post-text">
+                    <img src="@Model.Foto" height="400" width="600> alt="" /> <br />
+                    <p>@Model.Metin </p>
+                </div>
+            </div>
+            <div class="hr2"></div>
+            <div id="comments">
+                <ol id="singlecomments" class="commentlist">
+                    <li class="clearfix">
+                        @if (Model.Yorums.Count > 0)
+                        {
+                            foreach (var item in Model.Yorums.ToList())
+                            {
+                                <div class="user"><img alt="" src="~/style/images/art/a1.jpg" height="60" width="60" class="avatar" /></div>
+                                <div class="message">
+                                    <div class="info">
+                                        <h3><a href="#">@item.Uye.KullaniciAdi</a></h3>
+                                        <span class="date">@item.Tarih.Value.Day-@item.Tarih.Value.Month-@item.Tarih.Value.Year</span>
+                                    </div>
+                                    <p>@item.Metin</p>
+                                    @if (Convert.ToInt32(Session["uyeid"]) == item.UyeID || Convert.ToInt32(Session["yetki"]) == 1) // yetkisi yoks sadece kendi yrumunu silebilir admin ise  tüm yoruları silebilir
+                                    {
+                                        <a class="btn btn-danger" href="/site/YorumSil/@item.YorumID">Sil</a>
+                                    }
+                                </div>
+                             <br />
+                            <br />
+                            <br />
+                            <br />
+                                   
+                            }
+                        }
+                        else
+                        {
+                            <h3>Henüz yorum yapan yok.</h3>
+                        }
+                    </li>
+                </ol>
+            </div>
+            <div class="comment-form">
+                <h3>Yorum Gönder</h3>
+                @if (Session["uyeid"] != null)
+                {
+                    <div class="form-container">
+                        <form class="forms cform" action="#" method="post">
+                            <fieldset>
+                                <ol>
+
+                                    <li class="form-row text-area-row">
+                                        <label>Yorumunuz</label>
+                                        <textarea name="message" id="yorum" class="text-area required"></textarea>
+                                    </li>
+                                    <li class="form-row hidden-row">
+                                        <input type="hidden" name="hidden" value="" />
+                                    </li>
+                                    <li class="button-row">
+                                        <input type="submit" value="Gönder" id="gonder" name="submit" class="btn-submit" />
+                                    </li>
+                                </ol>
+
+                            </fieldset>
+                        </form>
+                        <div class="response"></div>
+                    </div>
+                }
+                else
+                {
+                    <h3>  <a href="/Uye/Login/">Yorum yapmak için lütfen giriş yapınız</a></h3>
+                }
+            </div>
+        </div>
+        <div class="sidebar">
+        @*arama kısmı*@
+        @using (Html.BeginForm("BlogArama", "site", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            <div class="card my-4">
+                <h5 class="card-header">Arama</h5>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input id="Ara" name="Ara" type="text" class="form-control" placeholder="Ara...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" value="Ara" type="submit">Ara!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        }
+            @*kategoriler kısmı*@
+            <div class="sidebar-box">
+                <h4>Kategoriler</h4>
+                <div class="cat-list">
+                    <ul>
+                        @{
+                            Html.RenderAction("KategoriPartial2", "Site");  /*true iken hata veriyordu*/
+                        }
+                    </ul>
+                </div>
+            </div>
+           <div class="sidebar-box">
+                @*son eklenenler kısmı*@
+                <h4>Son Haberler</h4>
+                @{
+                    Html.RenderAction("SonYazilar", "Site");  /*true iken hata veriyordu*/
+                }
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#gonder").click(function () {  // id si gönder olan butonu bul
+                    var yorumum = $("#yorum").val();       //   yorumumuz
+                    var id = $("#YaziID").val(); //hangi yazıya yorum verdiğimiz
+                    $.ajax({
+                        type: "Post",
+                        url: "/site/YorumYap",
+                        data: { yorum: yorumum, yaziID: id },
+                        success: function (data) {
+                            alert("Yorumunuz Başarıyla Gönderilmiştir  :" + yorumum);
+                        }
+                    });
+                });              
+            });
+        </script>
+    

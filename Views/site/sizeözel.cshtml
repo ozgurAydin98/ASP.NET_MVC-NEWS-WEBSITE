@@ -1,0 +1,86 @@
+﻿@model IEnumerable<darkZencefil.Models.Yazi>
+
+
+
+
+
+<div class="carousel">
+    <div id="carousel-scroll"><a href="#" id="prev">Prev</a><a href="#" id="next">Next</a></div>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li> <a href="/site/haberDetay/@item.YaziID"> <span class="overlay details"></span><img src="@item.Foto" alt="" /> </a> </li>
+        }
+        @*<li> <a href="#"> <span class="overlay details"></span><img src="~/style/images/art/c1.jpg" alt="" /> </a> </li>
+        <li> <a href="#"> <span class="overlay details"></span><img src="~/style/images/art/c2.jpg" alt="" /> </a> </li>
+        <li> <a href="#"> <span class="overlay details"></span><img src="~/style/images/art/c3.jpg" alt="" /> </a> </li>
+        <li> <a href="#"> <span class="overlay details"></span><img src="~/style/images/art/c4.jpg" alt="" /> </a> </li>
+        <li> <a href="#"> <span class="overlay details"></span><img src="~/style/images/art/c5.jpg" alt="" /> </a> </li>
+        <li> <a href="#"> <span class="overlay details"></span><img src="~/style/images/art/c6.jpg" alt="" /> </a> </li>*@
+    </ul>
+</div>
+
+
+
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Kategori.KategoriAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uye.KullaniciAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Baslik)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Metin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Foto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tarih)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sayı)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kategori.KategoriAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Uye.KullaniciAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Baslik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Metin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Foto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tarih)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sayı)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.YaziID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.YaziID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.YaziID })
+        </td>
+    </tr>
+}
+
+</table>*@

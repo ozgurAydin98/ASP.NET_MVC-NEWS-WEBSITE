@@ -1,0 +1,60 @@
+﻿@*@model IEnumerable<darkZencefil.Models.Yazi>*@
+@using PagedList
+@using PagedList.Mvc
+
+@model IPagedList<darkZencefil.Models.Yazi>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="post">
+    @foreach (var item in Model)
+    {
+
+
+
+        <!-- Begin Post Info -->
+        <div class="post-info">
+            <!-- Begin Date -->
+            <div class="post-date"> <span class="day">@item.Tarih.Value.Day</span> <span class="month">@String.Format("{0: MMM}", @item.Tarih)</span> <span class="year">@item.Tarih.Value.Year</span> </div>
+            <!-- End Date -->
+            <!-- Begin Title -->
+            <div class="post-title">
+                <a style="font-size:30px" href="/site/haberDetay/@item.YaziID">@item.Baslik</a>
+                <div class="post-meta"> <span class="comments"><a href="#">@item.Yorums.Count</a></span> <span class="categories"><a href="#">@item.Kategori.KategoriAdi</a></span> </div>
+            </div>
+            <!-- End Title -->
+        </div>
+        <!-- End Post Info -->
+
+        <div class="post-text">
+            <a href="/site/haberDetay/@item.YaziID"><img src="@item.Foto  " height="400" width="600 " alt="" /></a> <br />
+            <p>
+                @if (item.Metin.Length > 50)
+                {
+                    @item.Metin.Substring(0, 151);
+                }
+                else {
+                    @item.Metin;
+                }
+
+                <a href="/site/haberDetay/@item.YaziID" class="more">Devamını oku →</a>
+            </p>
+        </div>
+
+
+        <div class="hr2"></div>
+    }
+
+
+    @Html.PagedListPager(Model, i => Url.Action("blog", "Site", new { i }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< İlk", LinkToPreviousPageFormat = "< Önceki", LinkToNextPageFormat = "Sonraki >", LinkToLastPageFormat = "Son >>" })
+
+
+
+
+
+
+
+
+   </div>
+<div class="t"></div>
+

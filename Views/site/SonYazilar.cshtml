@@ -1,0 +1,15 @@
+﻿@model IEnumerable<darkZencefil.Models.Yazi>
+@{
+    Layout = null;
+}
+
+
+<ul class="latest-posts">
+    @foreach (var item in Model)
+    {
+
+        <li><span class="date"><em class="day">@item.Tarih.Value.Day</em><em class="month"> @String.Format("{0: MMM}", @item.Tarih)</em></span> <a style="font-size:15px" href="/site/haberDetay/@item.YaziID">@item.Baslik  </a> </li>
+        
+
+    }
+</ul>

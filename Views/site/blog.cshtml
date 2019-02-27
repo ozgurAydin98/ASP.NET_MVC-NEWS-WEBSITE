@@ -1,0 +1,300 @@
+﻿@*@model IEnumerable<darkZencefil.Models.Yazi>*@
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@using PagedList
+@using PagedList.Mvc
+
+@model IPagedList<darkZencefil.Models.Yazi>
+
+@{
+    //ViewBag.Title = "Anasayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="shortcut icon" type="image/x-icon" href="~/style/images/favicon.png" />
+<link rel="stylesheet" type="text/css" href="~/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="~/style/color/red.css" media="all" />
+<link rel="stylesheet" type="text/css" media="screen" href="~/style/css/prettyPhoto.css" />
+<link rel="stylesheet" type="text/css" href="~/style/type/museo.css" media="all" />
+<link rel="stylesheet" type="text/css" href="~/style/type/ptsans.css" media="all" />
+<link rel="stylesheet" type="text/css" href="~/style/type/charis.css" media="all" />
+
+<script type="text/javascript" src="~/style/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="~/style/js/ddsmoothmenu.js"></script>
+<script type="text/javascript" src="~/style/js/transify.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.aw-showcase.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.jcarousel.js"></script>
+<script type="text/javascript" src="~/style/js/carousel.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.superbgimage.min.js"></script>
+<script type="text/javascript" src="~/style/js/jquery.slickforms.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('.forms').dcSlickForms();
+    });
+</script>
+
+<br />
+<br />
+<br />
+<br />
+<div class="carousel" style="height:150px">
+    <h1>Sizin için seçtiklerimiz</h1>
+    <div id="carousel-scroll"><a href="#" id="prev">Prev</a><a href="#" id="next">Next</a></div>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li> <a href="/site/haberDetay/@item.YaziID"> <span class="overlay details"></span><img src="@item.Foto" height="90" width="150" alt="" />@item.Baslik </a> </li>
+        }
+
+
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+<div id="container" class="opacity">
+
+    @Html.PagedListPager(Model, i => Url.Action("blog", "Site", new { i }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< İlk", LinkToPreviousPageFormat = "< Önceki", LinkToNextPageFormat = "Sonraki >", LinkToLastPageFormat = "Son >>" })
+
+
+    <!-- Begin Blog -->
+    <div class="blog">
+        @*haberlerin bağlangıcı*@
+
+        <!-- Begin Posts -->
+        <div class="content">
+
+
+            @*/// haberi bağşangıcı*@
+            <div class="post">
+                @foreach (var item in Model)
+                {
+
+
+
+                    <!-- Begin Post Info -->
+                    <div class="post-info">
+                        <!-- Begin Date -->
+                        <div class="post-date"> <span class="day">@item.Tarih.Value.Day</span> <span class="month">@String.Format("{0: MMM}", @item.Tarih)</span> <span class="year">@item.Tarih.Value.Year</span> </div>
+                        <!-- End Date -->
+                        <!-- Begin Title -->
+                        <div class="post-title">
+                            <a style="font-size:30px" href="/site/haberDetay/@item.YaziID">@item.Baslik</a>
+                            <div class="post-meta"> <span class="comments"><a href="#">@item.Yorums.Count</a></span> <span class="categories"><a href="#">@item.Kategori.KategoriAdi</a></span> </div>
+                        </div>
+                        <!-- End Title -->
+                    </div>
+                    <!-- End Post Info -->
+
+                    <div class="post-text">
+                        <a href="/site/haberDetay/@item.YaziID"><img src="@item.Foto  " height="400" width="600 " alt="" /></a> <br />
+                        <p>
+                            @if (item.Metin.Length > 50)
+                            {
+                                @item.Metin.Substring(0, 151);
+                            }
+                            else {
+                                @item.Metin;
+                            }
+
+                            <a href="/site/haberDetay/@item.YaziID" class="more">Devamını oku →</a>
+                        </p>
+                    </div>
+                    <!-- End Text -->
+                    @*<span class="tags"><a href="#">Black & White</a>, <a href="#">Borsa</a>, <a href="#">Dolar</a></span>*@
+
+                    <div class="hr2"></div>
+                }
+                @Html.PagedListPager(Model, i => Url.Action("blog", "Site", new { i }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< İlk", LinkToPreviousPageFormat = "< Önceki", LinkToNextPageFormat = "Sonraki >", LinkToLastPageFormat = "Son >>" })
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            @*birinci haber*@
+            <!-- End Post -->
+            <!-- Begin Post -->
+            @*<div class="post">
+
+                    <!-- Begin Post Info -->
+                    <div class="post-info">
+                        <!-- Begin Date -->
+                        <div class="post-date"> <span class="day">15</span> <span class="month">ŞUB</span> <span class="year">2011</span> </div>
+                        <!-- End Date -->
+                        <!-- Begin Title -->
+                        <div class="post-title">
+                            <h1><a href="/site/haberDetay">Başlık</a></h1>
+                            <div class="post-meta"> <span class="comments"><a href="#">13 Yorum</a></span> <span class="categories"><a href="#">Futbol</a>, <a href="#">Ekonomi</a></span> </div>
+                        </div>
+                        <!-- End Title -->
+                    </div>
+                    <!-- End Post Info -->
+
+                    <div class="post-text">
+                        <iframe src="http://player.vimeo.com/video/24573328?title=0&amp;byline=0&amp;portrait=0" width="595" height="335" frameborder="0"></iframe> <br />
+
+                        <p>Kısa içerik... <a href="/site/haberDetay" class="more">Devamını oku →</a></p>
+                    </div>
+                    <!-- End Text -->
+                    <span class="tags"><a href="#">Black & White</a>, <a href="#">Borsa</a>, <a href="#">Dolar</a></span>
+                </div>   @*birinci haber*@
+            <!-- End Post -->
+            <!-- Begin Post -->
+            <!-- End Post -->
+            <!-- Begin Page Navi -->
+            @*<div class="page-navi">
+
+                    <ul>
+                        <li><a href="#" class="current">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    </ul>
+                </div>*@
+            <!-- End Page Navi -->
+
+
+
+
+
+        </div>
+
+        <!-- End Posts -->
+        <!-- Begin Sidebar -->
+        <div class="sidebar">
+
+
+            @*arama kısmı*@
+            @*@using (Html.BeginForm("BlogArama", "site", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="sidebar-box">
+                        <h4>Arama</h4>
+
+                        <form class="searchform" method="get">
+
+                            <input type="text" id="s" name="s" value="Anahtar kelime girin" onfocus="this.value=''" onblur="this.value=''" />
+
+                        </form>
+
+                    </div>
+                }*@
+
+
+            @*arama kısmı*@
+            @using (Html.BeginForm("BlogArama", "site", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="card my-4">
+                    <h5 class="card-header">Arama</h5>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input id="Ara" name="Ara" type="text" class="form-control" placeholder="Ara...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" value="Ara" type="submit">Ara!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+            @*kategoriler kısmı*@
+            <div class="sidebar-box">
+                <h4>Kategoriler</h4>
+                <div class="cat-list">
+                    <ul>
+                        @{
+                            Html.RenderAction("KategoriPartial2", "Site");  /*true iken hata veriyordu*/
+                        }
+
+
+                        @*<li><a href="#">journal <span>24</span></a></li>
+                            <li><a href="#">photography <span>12</span></a></li>
+                            <li><a href="#">design <span>5</span></a></li>
+                            <li><a href="#">inspiration <span>3</span></a></li>
+                            <li><a href="#">fun <span>16</span></a></li>
+                            <li><a href="#">casual <span>5</span></a></li>
+                            <li><a href="#">business <span>9</span></a></li>
+                            <li><a href="#">web <span>2</span></a></li>
+                            <li><a href="#">color <span>1</span></a></li>
+                            <li><a href="#">portfolio <span>7</span></a></li>*@
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sidebar-box">
+
+                @*son eklenenler kısmı*@
+                <h4>Son Haberler</h4>
+
+
+
+                @{
+                    Html.RenderAction("SonYazilar", "Site");  /*true iken hata veriyordu*/
+                }
+
+
+
+            </div>
+
+
+
+
+
+            @*taglar kısmı*
+                <div class="sidebar-box">
+                    <h4>Etiketler</h4>
+                    <div class="tag-list">
+                        <ul>
+                            <li><a href="#">journal</a></li>
+                            <li><a href="#">photography</a></li>
+                            <li><a href="#">design</a></li>
+                            <li><a href="#">inspiration</a></li>
+                            <li><a href="#">fun</a></li>
+                            <li><a href="#">casual</a></li>
+                            <li><a href="#">business</a></li>
+                            <li><a href="#">web</a></li>
+                            <li><a href="#">color</a></li>
+                            <li><a href="#">portfolio</a></li>
+                        </ul>
+                    </div>
+                </div>*@
+
+
+
+
+        </div>
+        <!-- End Sidebar -->
+
+
+
+    </div>
+    <!-- End Blog -->
