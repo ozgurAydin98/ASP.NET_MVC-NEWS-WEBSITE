@@ -19,7 +19,9 @@ Add, edit and delete the news system.
 
 ## SCREEN SHOT
 
-https://user-images.githubusercontent.com/44027865/53483339-4e9c1980-3a92-11e9-89df-02a04d2229a5.png
+![zsfsff](https://user-images.githubusercontent.com/44027865/53483339-4e9c1980-3a92-11e9-89df-02a04d2229a5.png)
+
+
 
 
 
