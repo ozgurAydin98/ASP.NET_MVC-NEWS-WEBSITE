@@ -12,7 +12,7 @@ Add, edit and delete the news system.
 
 1-ASP.NET MVC
 2-SQLSERVER
-3-JAVASCRIPTH
+3-JAVASCRIPT
 4-HTML-CSS
 5-AJAX
 
